@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<div>
+    <form method="POST" action="/post">
+        <label for="First Name">First Name</label>
+        <input type="text" id="firstName" name="first">
+        <br>
+       <label for="Last Name">Last Name</label>
+        <input type="text"id="lastName"name="last">
+        <br>
+        <input type="submit" value="submit" />
+    </form>
+</div>
+ <h1>{{ .FirstName }} {{ .LastName }}</h1>
+</body>
+</html>
