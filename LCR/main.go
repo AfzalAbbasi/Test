@@ -4,8 +4,6 @@ import (
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"io"
@@ -14,8 +12,12 @@ import (
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
+var path = "F:\\file.csv"
 var (
 	session    *mgo.Session
 	collection *mgo.Collection
@@ -32,14 +34,25 @@ const (
 )
 
 type LCRData struct {
-	Active bool   `json:"active" bson:"active"`
-	Number Number `json:"number" bson:"number"`
+	CarrierID bson.ObjectId `json:"carrierid" bson:"_carrierid"`
+	Active    bool          `json:"active" bson:"active"`
+	Number    Number        `json:"number" bson:"number"`
+}
+type Carrier struct {
+	//ID          bson.ObjectId `json:"ID" bson:"_id"`
+	Name        string
+	DispatcerID int
+	Active      bool
+	CreateDate  time.Time
+	UpdateDate  time.Time
 }
 
 type LCRDataa struct {
-	ID     bson.ObjectId `json:"ID" bson:"_id"`
-	Active bool          `json:"active" bson:"active"`
-	Number Number        `json:"number" bson:"number"`
+	//ID          bson.ObjectId `json:"ID" bson:"_id"`
+	ID        bson.ObjectId `json:"ID" bson:"_id"`
+	CarrierID bson.ObjectId `json:"carrierid " bson:"_carrierid"`
+	Active    bool          `json:"active" bson:"active"`
+	Number    Number        `json:"number" bson:"number"`
 }
 
 type Number struct {
@@ -64,8 +77,9 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	// Routes
-	//e.Static("/", "public")
-	e.POST("/users", postcsv)
+	e.Use(middleware.Static("Template"))
+	e.POST("/users/:id", postcsv)
+	e.POST("/carrier", carrier)
 	e.GET("/users/:id", getUser)
 	// Create a session which maintains a pool of socket connections
 	// to our MongoDB.
@@ -85,46 +99,55 @@ func main() {
 	defer session.Close()
 	// Optional. Switch the session to a monotonic behavior.
 	session.SetMode(mgo.Monotonic, true)
+
 	e.Logger.Fatal(e.Start(":8080"))
 
 }
 func postcsv(c echo.Context) error {
-	//	var b []byte
+
 	session.Copy()
 	collection = session.DB("lcr").C("test")
-	file, err := os.Open("C:\\Users\\Afzal\\Desktop\\Book1.csv")
-
+	p_id := bson.ObjectIdHex(c.Param("id"))
+	// Destination
+	key := "myfile"
+	file, err := c.FormFile(key)
 	if err != nil {
+		//	return err
 		CreateBadResponse(&c, http.StatusNotFound, "Data", "Not Found")
 	}
-	defer file.Close()
-	reader := csv.NewReader(file)
+	src, err := file.Open()
+	if err != nil {
+		return c.JSON(http.StatusOK, "Not found")
+		return err
+	}
+	defer src.Close()
+	dst, err := os.Create("F:\\file.csv")
+	if _, err = io.Copy(dst, src); err != nil {
+		return err
+	}
+	defer dst.Close()
+	Csvfile, err := os.Open("F:\\file.csv")
+	defer Csvfile.Close()
+	reader := csv.NewReader(Csvfile)
 
 	for {
 		data, err := reader.Read()
 		record = data
-		//a :=[]Mongo{}
-
 		if err == io.EOF {
-			//return CreateSuccessResponse(&c, http.StatusOK, "Data", "are Uploaded", record)
+			//os.Remove(path)
 			return c.JSON(http.StatusOK, "Data are Uploaded")
-		} else if err != nil {
-			return c.JSON(http.StatusNotFound, err)
 		}
 		number, err := strconv.Atoi(record[0])
 		interstate, err := strconv.ParseFloat(record[1], 64)
 		intrastate, err := strconv.ParseFloat(record[2], 64)
 		indeterminate, err := strconv.ParseFloat(record[3], 64)
-		err = collection.Insert(&LCRData{true, Number{number, Rate{interstate, intrastate, indeterminate}}})
+		err = collection.Insert(&LCRData{p_id, true, Number{number, Rate{interstate, intrastate, indeterminate}}})
 		if err != nil {
+			fmt.Println(err)
 			CreateBadResponse(&c, http.StatusNotFound, "Data", "Not Found")
 		}
 
 	}
-
-	//defer session.Close()
-	return c.JSON(http.StatusOK, record)
-
 }
 func getUser(c echo.Context) error {
 	session.Copy()
@@ -140,9 +163,20 @@ func getUser(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusNotFound, err)
 	}
-	//defer session.Close()
 	return CreateSuccessResponse(&c, 200, "Get Data", "Successful", b)
 
+}
+func carrier(c echo.Context) error {
+	session.Copy()
+	collection = session.DB("lcr").C("carrier")
+	// Destination
+
+	err := collection.Insert(&Carrier{"tets", 50, true, time.Now().UTC(), time.Now().UTC()})
+	if err != nil {
+		CreateBadResponse(&c, http.StatusNotFound, "Data", "Not Found")
+	}
+
+	return c.JSON(http.StatusOK, "Data Are uploaded")
 }
 
 func CreateSuccessResponse(c *echo.Context, requestCode int, message string, subMessage string, data []byte) error {
