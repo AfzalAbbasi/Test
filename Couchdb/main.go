@@ -1,20 +1,53 @@
 package main
 
 import (
+	"fmt"
+	"regexp"
+	"github.com/zemirco/couchdb"
 	//"github.com/fjl/go-couchdb"
 
-	"github.com/couchbase/gocb"
+	"net/url"
 
-	"fmt"
+	"log"
+
+
 )
 
+type Data struct {
+	Name string `json:"name"`
+}
+
 const (
-	Host = ""
+	Host = "http://dev.venturetel.co:15984"
 )
 
 func main() {
-	cluster, _ := gocb.Connect(Host)
-	bucket, _ := cluster.OpenBucket("account/08/b8/0907389f7c529cfad507f12691ed", "")
-	fmt.Println(bucket.Name())
+	u, err := url.Parse(Host)
+	if err != nil {
+		fmt.Print(err)
+	}
+	client, err := couchdb.NewClient(u)
+	if err != nil {
+		log.Print(err)
+	}
+	var data []string
+	data, err=client.All()
+	if err != nil {
+		log.Print(err)
+	}
+	for _, item :=range data{
+		matched, err := regexp.MatchString("-", item)
+		if err!=nil{
+			fmt.Println(err)
+		}
+		if matched==true{
+			fmt.Println(item)
+		}
 
-}
+	}
+
+
+	}
+
+
+
