@@ -73,16 +73,7 @@ const (
 )
 
 func main() {
-	/*	mongoDBDialInfo := &mgo.DialInfo{
-			Addrs:   []string{"45.76.175.38:27017"},
-			Timeout: 60 * time.Second,
-		}
-		a, err := mgo.DialWithInfo(mongoDBDialInfo)
-		session = a
-		if err != nil {
-			log.Fatalf("CreateSession: %s\n", err)
-		}
-		defer session.Close()*/
+	
 	Devices()
 
 }
