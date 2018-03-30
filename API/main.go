@@ -65,9 +65,9 @@ var (
 
 //const MongoDb details
 const (
-	Host         = "45.76.175.38:27017"
+	Host         = ""
 	AuthUserName = "admin"
-	AuthPassword = "Lmkt@ptcl1234"
+	AuthPassword = ""
 	AuthDatabase = "admin"
 	Collection   = "CoLLections"
 )
@@ -151,7 +151,7 @@ func Devices() {
 	<-gocron.Start()
 }
 func Session() string {
-	person := &Person{"obiapi@epik.io", "b4ea33ea"}
+	person := &Person{"email", "pass}
 	buf, _ := json.Marshal(person)
 	body := bytes.NewBuffer(buf)
 	response, err := http.Post("https://api.obitalk.com/api/v1/sessions", "application/json", body)
