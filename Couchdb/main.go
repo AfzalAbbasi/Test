@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	Host = "http://dev.venturetel.co:15984/"
+	Host = ""
 )
 
 func main() {
