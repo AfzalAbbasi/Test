@@ -52,10 +52,10 @@ type SecondaryContact struct {
 }
 
 const (
-	host     = "52.64.154.200"
+	host     = ""
 	port     = 3306
-	user     = "root"
-	password = "lmkt@ptcl"
+	user     = ""
+	password = ""
 	dbname   = "mysql"
 )
 
@@ -75,7 +75,7 @@ func postdata(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err)
 	}
 	json.Unmarshal(rep, &data)
-	db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(52.64.154.200:3306)/mysql")
+	db, err := sql.Open("mysql", "")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -94,7 +94,7 @@ func getdata(w http.ResponseWriter, req *http.Request) {
 	id := queryValues.Get("id")
 	uptime := queryValues.Get("up")
 	totime := queryValues.Get("to")
-	db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(52.64.154.200:3306)/mysql")
+	db, err := sql.Open("mysql", "")
 	if err != nil {
 		fmt.Println(err)
 	}
