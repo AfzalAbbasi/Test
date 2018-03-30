@@ -19,9 +19,9 @@ var record []string
 
 //const MongoDb details
 const (
-	Host         = "52.64.154.200:3306"
+	Host         = ""
 	AuthUserName = "root"
-	AuthPassword = "37ARsYfKLGGrUF5"
+	AuthPassword = ""
 	AuthDatabase = "admin"
 	Collection   = "CoLLections"
 )
@@ -54,10 +54,10 @@ type SecondaryContact struct {
 }
 
 const (
-	host     = "52.64.154.200"
+	host     = ""
 	port     = 3306
-	user     = "root"
-	password = "lmkt@ptcl"
+	user     = ""
+	password = ""
 	dbname   = "mysql"
 )
 
@@ -77,7 +77,7 @@ func postdata(w http.ResponseWriter, req *http.Request) {
 	}
 	json.Unmarshal(rep, &data)
 
-	db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(52.64.154.200:3306)/mysql")
+	db, err := sql.Open("mysql", "hostname")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -89,24 +89,7 @@ func postdata(w http.ResponseWriter, req *http.Request) {
 	CreateSuccessResponse(w, "Data are Uploded")
 	defer db.Close()
 
-	/*mongoDBDialInfo := &mgo.DialInfo{
-		Addrs:   []string{"45.76.175.38:27017"},
-
-		Timeout: 60 * time.Second,
-	}
-	a, err := mgo.DialWithInfo(mongoDBDialInfo)
-	session = a
-	if err != nil {
-		log.Fatalf("CreateSession: %s\n", err)
-	}
-	session.SetMode(mgo.Monotonic, true)
-	collection = session.DB("lcr").C("test")
-
-	err = collection.Insert(data)
-	if err != nil {
-		BadResponse(w, "Data are Not uploaded")
-	}*/
-	//CreateSuccessResponse(w, "Data are successfull Uploaded")
+	
 }
 
 func CreateSuccessResponse(w http.ResponseWriter, message string) {
