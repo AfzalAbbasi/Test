@@ -85,7 +85,7 @@ func Devices() {
 	value := fmt.Sprintf("%s %s", "Bearer", token)
 
 	client := &http.Client{}
-	request, _ := http.NewRequest("GET", "https://api.obitalk.com/api/v1/devices", nil)
+	request, _ := http.NewRequest("GET", "", nil)
 	request.Header.Set("authorization", value)
 	response, err := client.Do(request)
 
@@ -98,7 +98,7 @@ func Devices() {
 	for _, item := range devicedata.DeviceData {
 		a := item.ID
 
-		api := fmt.Sprintf("%s/%s/%s", "https://api.obitalk.com/api/v1/devices", a, "quick-values")
+		api := fmt.Sprintf("%s/%s/%s", "", a, "quick-values")
 		request1, _ := http.NewRequest("POST", api, nil)
 		request1.Header.Set("authorization", value)
 		response1, err := client.Do(request1)
@@ -120,7 +120,7 @@ func Devices() {
 				}
 			}
 		}
-		db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(52.64.154.200:3306)/mysql")
+		db, err := sql.Open("mysql", "")
 		if err != nil {
 			fmt.Println(err)
 		}
