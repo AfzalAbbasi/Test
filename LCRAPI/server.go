@@ -36,7 +36,7 @@ func main() {
 func getSession() *mgo.Session {
 	// Connect to our local mongo
 	mongoDBDialInfo := &mgo.DialInfo{
-		Addrs:   []string{"45.76.175.38:27017"},
+		Addrs:   []string{""},
 		Timeout: 60 * time.Second,
 		//Database: AuthDatabase,
 		//Username: AuthUserName,
