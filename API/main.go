@@ -2,16 +2,17 @@ package main
 
 import (
 	"bytes"
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 
-	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jasonlvhit/gocron"
+	"github.com/labstack/gommon/log"
 	"golang.org/x/time/rate"
-	"gopkg.in/mgo.v2"
 )
 
 var limiter = rate.NewLimiter(2, 5)
@@ -19,7 +20,17 @@ var limiter = rate.NewLimiter(2, 5)
 type State struct {
 	DisplayString string `json:"displayString"`
 }
+type Message struct {
+	DisplayMessage string `json:"message"`
+}
 
+type Number struct {
+	SerialNumber string           `json:"serialNumber" db:"serialnumber"`
+	AlarmType    string           `json:"alarmType" db:"alarmtype"`
+	CreateDate   string           `json:"createTime"`
+	Primary      PrimaryContact   `json:"primaryContact" db:"primary"`
+	Secondary    SecondaryContact `json:"secondaryContact" db"secondary"`
+}
 type StatusData struct {
 	Data Status `json:"data"`
 }
@@ -37,6 +48,13 @@ type TokenData struct {
 	Data SessionData `json:"data"`
 }
 type DeviceData struct {
+	Device   string `json:"device"`
+	Online   bool   `json:"online"`
+	Firmware string `json:"firmware"`
+	State    `json:"sp_regstate"`
+	Number   `json:"number"`
+}
+type DeviceDataa struct {
 	DeviceData Device `json:"data"`
 }
 type SessionData struct {
@@ -46,7 +64,20 @@ type SessionData struct {
 	CreateAt  string `json:"createdAt"`
 	ExpiresAt string `json:"expiresAt"`
 }
-
+type PrimaryContact struct {
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"email"`
+	Phone     string `json:"phone"`
+	Mobile    string `json:"mobile"`
+}
+type SecondaryContact struct {
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"email"`
+	Phone     string `json:"phone"`
+	Mobile    string `json:"mobile"`
+}
 type Device []struct {
 	ID           string `json:"id" bson:"id"`
 	ObiNumber    string `json:"obiNumber" bson:"obiNumber"`
@@ -56,57 +87,34 @@ type Device []struct {
 	DeviceType   string `json:"deviceType" bson:"deviceType"`
 }
 
-var db *mgo.Database
-var Collections *mgo.Collection
-var (
-	session    *mgo.Session
-	collection *mgo.Collection
-)
-
-//const MongoDb details
-const (
-	Host         = "45.76.175.38:27017"
-	AuthUserName = "admin"
-	AuthPassword = "Lmkt@ptcl1234"
-	AuthDatabase = "admin"
-	Collection   = "CoLLections"
-)
+var sql_con, err = sql.Open("mysql", "root:lmkt@ptcl@tcp(mon.epik.io:3306)/DevicesLog")
 
 func main() {
-	/*	mongoDBDialInfo := &mgo.DialInfo{
-			Addrs:   []string{"45.76.175.38:27017"},
-			Timeout: 60 * time.Second,
-		}
-		a, err := mgo.DialWithInfo(mongoDBDialInfo)
-		session = a
-		if err != nil {
-			log.Fatalf("CreateSession: %s\n", err)
-		}
-		defer session.Close()*/
-	Devices()
+	sql_con.SetMaxOpenConns(-1)
+	http.HandleFunc("/dataupload", postdata)
+	http.HandleFunc("/getdata", getdata)
+	go func() {
+		gocron.Every(1).Minute().Do(Devices)
+		<-gocron.Start()
+	}()
+	http.ListenAndServe(":8080", nil)
 
 }
 func Devices() {
-	//	session.Copy()
-	//defer session.Close()
 	token := Session()
-	fmt.Println(token)
 	value := fmt.Sprintf("%s %s", "Bearer", token)
-
 	client := &http.Client{}
 	request, _ := http.NewRequest("GET", "https://api.obitalk.com/api/v1/devices", nil)
 	request.Header.Set("authorization", value)
 	response, err := client.Do(request)
-
 	if err != nil {
 		fmt.Print(err.Error())
 	}
 	req1, err := ioutil.ReadAll(response.Body)
-	var devicedata DeviceData
+	var devicedata DeviceDataa
 	json.Unmarshal(req1, &devicedata)
 	for _, item := range devicedata.DeviceData {
 		a := item.ID
-
 		api := fmt.Sprintf("%s/%s/%s", "https://api.obitalk.com/api/v1/devices", a, "quick-values")
 		request1, _ := http.NewRequest("POST", api, nil)
 		request1.Header.Set("authorization", value)
@@ -118,38 +126,138 @@ func Devices() {
 		var data StatusData
 		req, err := ioutil.ReadAll(response1.Body)
 		json.Unmarshal(req, &data)
-
+		if err != nil {
+			fmt.Println(err)
+		}
 		var b []State
 		for _, item := range data.Data.SpRegStates {
 			a := item.DisplayString
 			if a != "" {
 				if a != "Service Not Configured" && a != "null" {
 					b = append(b, State{DisplayString: a})
-
 				}
 			}
 		}
-		db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(52.64.154.200:3306)/mysql")
-		if err != nil {
-			fmt.Println(err)
-		}
+		var id = 0
 		data.Data.SpRegStates = b
-		i := fmt.Sprintf("%s", b)
-
-		_, err = db.Query("INSERT INTO Devices(device,online,firmware,spRegState) VALUES (?,?,?,?)", data.Data.Device, data.Data.Online, data.Data.Firmware, i)
-		//insert, err := db.Query("INSERT  into Test VALUES (?,?,?,?,?,?,?)")
+		j := fmt.Sprintf("%s", b)
+		n, err := sql_con.Query("INSERT INTO DeviceInformation(device,online,firmware,spRegState,id) VALUES (?,?,?,?,?)", data.Data.Device, data.Data.Online, data.Data.Firmware, j, id)
+		 n.Close()
 		if err != nil {
-			fmt.Println(err)
+			log.Print(err)
 		}
-		//	fmt.Println("Uploaded")
-		defer db.Close()
-		//collection = session.DB("lcr").C("db")
-		//err = collection.Insert(data)
+
 
 	}
-	gocron.Every(1).Minute().Do(Devices)
-	<-gocron.Start()
+
 }
+func postdata(w http.ResponseWriter, req *http.Request) {
+	var data Number
+	res := req.Body
+	fmt.Println(res)
+	rep, err := ioutil.ReadAll(res)
+	if err != nil {
+		fmt.Println(err)
+	}
+	json.Unmarshal(rep, &data)
+	if err != nil {
+
+		fmt.Println(err)
+	}
+	var id = 0
+	if data.SerialNumber==""{
+		BadResponse(w,"Serial Number field is Required")
+		return
+	}
+	n, err := sql_con.Query("INSERT INTO UserInformation(id,serialnumber,alarmtype,createtime,Pfirstname,Plastname,Pemail,Pphone,Pmobile,Sfirstname,Slastname,Semail,Sphone,Smobile) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", id, data.SerialNumber, data.AlarmType, time.Now().UTC(), data.Primary.FirstName, data.Primary.LastName, data.Primary.Email, data.Primary.Phone, data.Primary.Mobile, data.Secondary.FirstName, data.Secondary.LastName, data.Secondary.Email, data.Secondary.Phone, data.Secondary.Mobile)
+
+	if err != nil {
+		BadResponse(w, "Unable to Uplaod Data")
+		return
+	} else {
+		CreateSuccessResponse(w, "Data  Uploded")
+	}
+	defer n.Close()
+
+}
+func getdata(w http.ResponseWriter, req *http.Request) {
+	queryValues := req.URL.Query()
+	id := queryValues.Get("id")
+	uptime := queryValues.Get("from")
+	totime := queryValues.Get("to")
+	if (id=="")||(uptime=="")||(totime=="") {
+		BadResponse(w,"Enter the Correct URL")
+	}
+	data, err := sql_con.Query("select * from DeviceInformation d, UserInformation t where d.device = t.serialnumber and d.device = ? and t.createtime BETWEEN ? AND ?", id, uptime, totime)
+	if err != nil {
+		BadResponse(w, "Unable to Uplaod Data")
+		return
+	}
+	emp := DeviceData{}
+	res := []DeviceData{}
+	for data.Next() {
+		var idd int
+		var online bool
+		var device, firmware, createtime, serialnumber, spRegStaee, alarmtype, Pfirstname, Plastname, Pemail, Pphone, Pmobile, Sfirstname, Slastname, Semail, Sphone, Smobile string
+		err = data.Scan(&idd, &device, &online, &firmware, &spRegStaee, &idd, &serialnumber, &alarmtype, &createtime, &Pfirstname, &Plastname, &Pemail, &Pphone, &Pmobile, &Sfirstname, &Slastname, &Semail, &Sphone, &Smobile)
+		if err != nil {
+			fmt.Println(err)
+		}
+		emp.Device = device
+		emp.Online = online
+		emp.Firmware = firmware
+		emp.DisplayString = spRegStaee
+		emp.SerialNumber = serialnumber
+		emp.AlarmType = alarmtype
+		emp.CreateDate = createtime
+		emp.Primary.FirstName = Pfirstname
+		emp.Primary.LastName = Plastname
+		emp.Primary.Email = Pemail
+		emp.Primary.Phone = Pphone
+		emp.Primary.Mobile = Pmobile
+		emp.Secondary.FirstName = Sfirstname
+		emp.Secondary.LastName = Slastname
+		emp.Secondary.Email = Semail
+		emp.Secondary.Phone = Sphone
+		emp.Secondary.Mobile = Smobile
+		res = append(res, emp)
+	}
+
+
+	if (id!=emp.Device){
+		BadResponse(w,"Enter  Correct ID OR Time Range")
+	}
+	w.Header().Set("Content-Type", "application/json")
+//	fmt.Print(res)
+	messagee, err := json.Marshal(res)
+	if err != nil {
+		fmt.Println(err)
+	}
+	w.Write(messagee)
+
+}
+func CreateSuccessResponse(w http.ResponseWriter, message string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	status := Message{message}
+	messagee, err := json.Marshal(status)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	w.Write(messagee)
+}
+func BadResponse(w http.ResponseWriter, message string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNotFound)
+	status := Message{message}
+	messagee, err := json.Marshal(status)
+	if err != nil {
+		fmt.Println(err)
+	}
+	w.Write(messagee)
+}
+
 func Session() string {
 	person := &Person{"obiapi@epik.io", "b4ea33ea"}
 	buf, _ := json.Marshal(person)
@@ -162,7 +270,6 @@ func Session() string {
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		fmt.Print(err.Error())
-
 	}
 	var data TokenData
 	json.Unmarshal(responseData, &data)

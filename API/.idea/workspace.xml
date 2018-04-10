@@ -14,11 +14,13 @@
       <file leaf-file-name="main.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="145" column="48" lean-forward="true" selection-start-line="145" selection-start-column="48" selection-end-line="145" selection-end-column="48" />
+            <state relative-caret-position="-915">
+              <caret line="166" column="10" lean-forward="false" selection-start-line="166" selection-start-column="10" selection-end-line="166" selection-end-column="10" />
               <folding>
-                <element signature="e#14#212#0" expanded="true" />
-                <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+                <element signature="e#14#235#0" expanded="true" />
+                <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+                <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+                <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
               </folding>
             </state>
           </provider>
@@ -32,6 +34,11 @@
         <option value="Go File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>close</find>
+    </findStrings>
   </component>
   <component name="GOROOT" path="C:\Go" />
   <component name="IdeDocumentHistory">
@@ -47,7 +54,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="773" />
@@ -67,6 +74,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -74,12 +83,49 @@
               <item name="API" type="b2602c69:ProjectViewProjectNode" />
               <item name="API" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;API&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+            </path>
+            <path>
+              <item name="API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;API&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;API&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;API&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+              <item name="jasonlvhit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;API&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+              <item name="jasonlvhit" type="462c0819:PsiDirectoryNode" />
+              <item name="gocron" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -121,14 +167,14 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26427525" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22620791" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32861635" sideWeight="0.511713" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2783019" sideWeight="0.5168375" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2783019" sideWeight="0.4919473" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2783019" sideWeight="0.48316252" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32861635" sideWeight="0.48828697" order="7" side_tool="false" content_ui="tabs" />
@@ -151,7 +197,24 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="483" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>158</line>
+          <option name="timeStamp" value="561" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>159</line>
+          <option name="timeStamp" value="562" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>161</line>
+          <option name="timeStamp" value="563" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="620" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -161,8 +224,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -172,8 +237,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -183,8 +250,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -194,8 +263,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -205,8 +276,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -216,8 +289,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -227,8 +302,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -238,8 +315,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -249,8 +328,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -260,8 +341,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -271,8 +354,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -282,8 +367,244 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>
@@ -376,13 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Go/src/runtime/panic.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="576" column="0" lean-forward="false" selection-start-line="576" selection-start-column="0" selection-end-line="576" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Go/src/builtin/builtin.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -405,13 +719,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/Go/src/database/sql/sql.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="2742" column="16" lean-forward="false" selection-start-line="2742" selection-start-column="16" selection-end-line="2742" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp56655/home/go/src/hello/main.go" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/scp41413/home/go/src/hello/main.go" />
+    <entry file="file://C:/Go/src/runtime/panic.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="576" column="0" lean-forward="false" selection-start-line="576" selection-start-column="0" selection-end-line="576" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="145" column="48" lean-forward="true" selection-start-line="145" selection-start-column="48" selection-end-line="145" selection-end-column="48" />
+        <state relative-caret-position="-915">
+          <caret line="166" column="10" lean-forward="false" selection-start-line="166" selection-start-column="10" selection-end-line="166" selection-end-column="10" />
           <folding>
-            <element signature="e#14#212#0" expanded="true" />
-            <marker date="1522155014666" expanded="true" signature="3255:3326" ph="INSERT INTO Devices... " />
+            <element signature="e#14#235#0" expanded="true" />
+            <marker date="1522748880865" expanded="true" signature="3892:3978" ph="INSERT INTO DeviceInformation... " />
+            <marker date="1522748880865" expanded="true" signature="4483:4671" ph="INSERT INTO UserInformation... " />
+            <marker date="1522748880865" expanded="true" signature="5405:5539" ph="select * fro... DeviceInformation" />
           </folding>
         </state>
       </provider>

@@ -4,27 +4,25 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	"gopkg.in/mgo.v2"
 	"io/ioutil"
 	"net/http"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
-var (
-	session    *mgo.Session
-	collection *mgo.Collection
-)
 var record []string
 
-//const MongoDb details
-const (
-	Host         = "52.64.154.200:3306"
-	AuthUserName = "root"
-	AuthPassword = "37ARsYfKLGGrUF5"
-	AuthDatabase = "admin"
-	Collection   = "CoLLections"
-)
+type State struct {
+	DisplayString string `json:"displayString"`
+}
+type DeviceData struct {
+	Device   string `json:"device"`
+	Online   bool   `json:"online"`
+	Firmware string `json:"firmware"`
+	State    `json:"sp_regstate"`
+	Number   `json:"number"`
+}
 
 type Message struct {
 	DisplayMessage string `json:"message"`
@@ -33,7 +31,7 @@ type Message struct {
 type Number struct {
 	SerialNumber string           `json:"serialNumber" db:"serialnumber"`
 	AlarmType    string           `json:"alarmType" db:"alarmtype"`
-	CreateDate   time.Time        `json:"createTime"`
+	CreateDate   string           `json:"createTime"`
 	Primary      PrimaryContact   `json:"primaryContact" db:"primary"`
 	Secondary    SecondaryContact `json:"secondaryContact" db"secondary"`
 }
@@ -65,6 +63,7 @@ var db *sql.DB
 
 func main() {
 	http.HandleFunc("/dataupload", postdata)
+	http.HandleFunc("/getdata", getdata)
 	http.ListenAndServe(":8080", nil)
 }
 func postdata(w http.ResponseWriter, req *http.Request) {
@@ -76,39 +75,73 @@ func postdata(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err)
 	}
 	json.Unmarshal(rep, &data)
-
-	db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(52.64.154.200:3306)/mysql")
+	db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(mon.epik.io:3306)/DevicesLog")
 	if err != nil {
 		fmt.Println(err)
 	}
-	_, err = db.Query("INSERT INTO Test(serialnumber,alarmtype,createtime,Pfirstname,Plastname,Pemail,Pphone,Pmobile,Sfirstname,Slastname,Semail,Sphone,Smobile) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", data.SerialNumber, data.AlarmType, time.Now().UTC(), data.Primary.FirstName, data.Primary.LastName, data.Primary.Email, data.Primary.Phone, data.Primary.Mobile, data.Secondary.FirstName, data.Secondary.LastName, data.Secondary.Email, data.Secondary.Phone, data.Secondary.Mobile)
-	//insert, err := db.Query("INSERT  into Test VALUES (?,?,?,?,?,?,?)")
+	var id = 0
+	_, err = db.Query("INSERT INTO UserInformation(id,serialnumber,alarmtype,createtime,Pfirstname,Plastname,Pemail,Pphone,Pmobile,Sfirstname,Slastname,Semail,Sphone,Smobile) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", id, data.SerialNumber, data.AlarmType, time.Now().UTC(), data.Primary.FirstName, data.Primary.LastName, data.Primary.Email, data.Primary.Phone, data.Primary.Mobile, data.Secondary.FirstName, data.Secondary.LastName, data.Secondary.Email, data.Secondary.Phone, data.Secondary.Mobile)
 	if err != nil {
 		BadResponse(w, "Data are Not Uploaded")
+	} else {
+		CreateSuccessResponse(w, "Data are Uploded")
 	}
-	CreateSuccessResponse(w, "Data are Uploded")
 	defer db.Close()
 
-	/*mongoDBDialInfo := &mgo.DialInfo{
-		Addrs:   []string{"45.76.175.38:27017"},
-
-		Timeout: 60 * time.Second,
-	}
-	a, err := mgo.DialWithInfo(mongoDBDialInfo)
-	session = a
-	if err != nil {
-		log.Fatalf("CreateSession: %s\n", err)
-	}
-	session.SetMode(mgo.Monotonic, true)
-	collection = session.DB("lcr").C("test")
-
-	err = collection.Insert(data)
-	if err != nil {
-		BadResponse(w, "Data are Not uploaded")
-	}*/
-	//CreateSuccessResponse(w, "Data are successfull Uploaded")
 }
+func getdata(w http.ResponseWriter, req *http.Request) {
+	queryValues := req.URL.Query()
+	id := queryValues.Get("id")
+	uptime := queryValues.Get("from")
+	totime := queryValues.Get("to")
+	db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(mon.epik.io:3306)/DevicesLog")
+	if err != nil {
+		fmt.Println(err)
+	}
+	data, err := db.Query("select * from DeviceInformation d, UserInformation t where d.device = t.serialnumber and d.device = ? and t.createtime BETWEEN ? AND ?", id, uptime, totime)
+	if err != nil {
+		fmt.Print(err)
+	}
 
+	emp := DeviceData{}
+	res := []DeviceData{}
+	for data.Next() {
+		var id int
+		var online bool
+		var device, firmware, createtime, serialnumber, spRegStaee, alarmtype, Pfirstname, Plastname, Pemail, Pphone, Pmobile, Sfirstname, Slastname, Semail, Sphone, Smobile string
+		err = data.Scan(&id, &device, &online, &firmware, &spRegStaee, &id, &serialnumber, &alarmtype, &createtime, &Pfirstname, &Plastname, &Pemail, &Pphone, &Pmobile, &Sfirstname, &Slastname, &Semail, &Sphone, &Smobile)
+		if err != nil {
+			fmt.Println(err)
+		}
+		emp.Device = device
+		emp.Online = online
+		emp.Firmware = firmware
+		emp.DisplayString = spRegStaee
+		emp.SerialNumber = serialnumber
+		emp.AlarmType = alarmtype
+		emp.CreateDate = createtime
+		emp.Primary.FirstName = Pfirstname
+		emp.Primary.LastName = Plastname
+		emp.Primary.Email = Pemail
+		emp.Primary.Phone = Pphone
+		emp.Primary.Mobile = Pmobile
+		emp.Secondary.FirstName = Sfirstname
+		emp.Secondary.LastName = Slastname
+		emp.Secondary.Email = Semail
+		emp.Secondary.Phone = Sphone
+		emp.Secondary.Mobile = Smobile
+		res = append(res, emp)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Print(res)
+	messagee, err := json.Marshal(res)
+	if err != nil {
+		fmt.Println(err)
+	}
+	w.Write(messagee)
+
+}
 func CreateSuccessResponse(w http.ResponseWriter, message string) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -117,6 +150,7 @@ func CreateSuccessResponse(w http.ResponseWriter, message string) {
 	if err != nil {
 		fmt.Println(err)
 	}
+
 	w.Write(messagee)
 }
 func BadResponse(w http.ResponseWriter, message string) {
