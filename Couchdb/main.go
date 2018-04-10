@@ -28,7 +28,7 @@ type Data struct {
 
 const (
 <<<<<<< HEAD
-	Host = "http://dev.venturetel.co:15984"
+	Host = ""
 )
 
 func main() {
