@@ -92,9 +92,9 @@ type Device []struct {
 }
 
 <<<<<<< HEAD
-var sql_con, err = sql.Open("mysql", "root:lmkt@ptcl@tcp(mon.epik.io:3306)/DevicesLog")
+var sql_con, err = sql.Open("")
 =======
-var i, err = sql.Open("mysql", "root:lmkt@ptcl@tcp(mon.epik.io:3306)/DevicesLog")
+var i, err = sql.Open()
 >>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 
 /*func Connerction() *sql.DB {
@@ -362,7 +362,7 @@ func BadResponse(w http.ResponseWriter, message string) {
 >>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 
 func Session() string {
-	person := &Person{"obiapi@epik.io", "b4ea33ea"}
+	person := &Person{""}
 	buf, _ := json.Marshal(person)
 	body := bytes.NewBuffer(buf)
 	response, err := http.Post("https://api.obitalk.com/api/v1/sessions", "application/json", body)
