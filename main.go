@@ -77,7 +77,8 @@ func createUser(c echo.Context) error {
 	}
 	f.Write(b)
 	f.Close()
-	return c.JSON(http.StatusOK, User{counter, name, last})
+	return CreateSuccessResponse(&c, 200, "successful", "data", b)
+	//return c.JSON(http.StatusOK, User{counter, name, last})
 }
 
 func getUser(c echo.Context) error {
@@ -124,4 +125,11 @@ func updateUser(c echo.Context) error {
 	f.Write(b)
 	f.Close()
 	return c.JSON(http.StatusOK, &Message{"User are Updated"})
+}
+func CreateSuccessResponse(c *echo.Context, requestCode int, message string, subMessage string, data []byte) error {
+
+	localC := *c
+	response := fmt.Sprintf("{\"data\":%s,\"message\":%q,\"submessage\":%q}", data, message, subMessage)
+	fmt.Print(response)
+	return localC.JSONBlob(requestCode, []byte(response))
 }

@@ -26,9 +26,9 @@ var (
 
 //const MongoDb details
 const (
-	Host         = "db3.mycallblast.com:27017"
+	Host         = ""
 	AuthUserName = "admin"
-	AuthPassword = "Lmkt@ptcl1234"
+	AuthPassword = ""
 	AuthDatabase = "admin"
 	Collection   = "CoLLections"
 )
@@ -48,7 +48,7 @@ func main() {
 	// Create a session which maintains a pool of socket connections
 	// to our MongoDB.
 	mongoDBDialInfo := &mgo.DialInfo{
-		Addrs:    []string{"db3.mycallblast.com:27017"},
+		Addrs:    []string{""},
 		Timeout:  60 * time.Second,
 		Database: AuthDatabase,
 		Username: AuthUserName,

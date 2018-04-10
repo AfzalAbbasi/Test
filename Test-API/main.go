@@ -52,10 +52,10 @@ type SecondaryContact struct {
 }
 
 const (
-	host     = "52.64.154.200"
+	host     = ""
 	port     = 3306
-	user     = "root"
-	password = "lmkt@ptcl"
+	user     = ""
+	password = ""
 	dbname   = "mysql"
 )
 
@@ -75,12 +75,20 @@ func postdata(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err)
 	}
 	json.Unmarshal(rep, &data)
+<<<<<<< HEAD
 	db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(mon.epik.io:3306)/DevicesLog")
+=======
+	db, err := sql.Open("mysql", "")
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 	if err != nil {
 		fmt.Println(err)
 	}
 	var id = 0
+<<<<<<< HEAD
 	_, err = db.Query("INSERT INTO UserInformation(id,serialnumber,alarmtype,createtime,Pfirstname,Plastname,Pemail,Pphone,Pmobile,Sfirstname,Slastname,Semail,Sphone,Smobile) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", id, data.SerialNumber, data.AlarmType, time.Now().UTC(), data.Primary.FirstName, data.Primary.LastName, data.Primary.Email, data.Primary.Phone, data.Primary.Mobile, data.Secondary.FirstName, data.Secondary.LastName, data.Secondary.Email, data.Secondary.Phone, data.Secondary.Mobile)
+=======
+	_, err = db.Query("INSERT INTO Test(id,serialnumber,alarmtype,createtime,Pfirstname,Plastname,Pemail,Pphone,Pmobile,Sfirstname,Slastname,Semail,Sphone,Smobile) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", id, data.SerialNumber, data.AlarmType, time.Now().UTC(), data.Primary.FirstName, data.Primary.LastName, data.Primary.Email, data.Primary.Phone, data.Primary.Mobile, data.Secondary.FirstName, data.Secondary.LastName, data.Secondary.Email, data.Secondary.Phone, data.Secondary.Mobile)
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 	if err != nil {
 		BadResponse(w, "Data are Not Uploaded")
 	} else {
@@ -92,6 +100,7 @@ func postdata(w http.ResponseWriter, req *http.Request) {
 func getdata(w http.ResponseWriter, req *http.Request) {
 	queryValues := req.URL.Query()
 	id := queryValues.Get("id")
+<<<<<<< HEAD
 	uptime := queryValues.Get("from")
 	totime := queryValues.Get("to")
 	db, err := sql.Open("mysql", "root:lmkt@ptcl@tcp(mon.epik.io:3306)/DevicesLog")
@@ -99,6 +108,15 @@ func getdata(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err)
 	}
 	data, err := db.Query("select * from DeviceInformation d, UserInformation t where d.device = t.serialnumber and d.device = ? and t.createtime BETWEEN ? AND ?", id, uptime, totime)
+=======
+	uptime := queryValues.Get("up")
+	totime := queryValues.Get("to")
+	db, err := sql.Open("mysql", "")
+	if err != nil {
+		fmt.Println(err)
+	}
+	data, err := db.Query("select * from Devices d, Test t where d.device = t.serialnumber and d.device = ? and t.createtime BETWEEN ? AND ?", id, uptime, totime)
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 	if err != nil {
 		fmt.Print(err)
 	}

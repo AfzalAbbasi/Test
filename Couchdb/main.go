@@ -3,12 +3,23 @@ package main
 import (
 	"fmt"
 	"regexp"
+<<<<<<< HEAD
 	//	"time"
 	"github.com/zemirco/couchdb"
 	"log"
 	"net/url"
 	"strings"
 	"time"
+=======
+	"github.com/zemirco/couchdb"
+	//"github.com/fjl/go-couchdb"
+
+	"net/url"
+
+	"log"
+
+
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 )
 
 type Data struct {
@@ -16,6 +27,7 @@ type Data struct {
 }
 
 const (
+<<<<<<< HEAD
 	Host = "http://dev.venturetel.co:15984"
 )
 
@@ -27,6 +39,12 @@ func main() {
 	PrevMonth := time.Now().UTC().Add(-12960 * time.Hour)
 	//fmt.Println(PrevMonth)
 	fmt.Print("\n")
+=======
+	Host = ""
+)
+
+func main() {
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 	u, err := url.Parse(Host)
 	if err != nil {
 		fmt.Print(err)
@@ -36,6 +54,7 @@ func main() {
 		log.Print(err)
 	}
 	var data []string
+<<<<<<< HEAD
 	data, err = client.All()
 	if err != nil {
 		log.Print(err)
@@ -62,5 +81,25 @@ func main() {
 		}
 
 	}
+=======
+	data, err=client.All()
+	if err != nil {
+		log.Print(err)
+	}
+	for _, item :=range data{
+		matched, err := regexp.MatchString("-", item)
+		if err!=nil{
+			fmt.Println(err)
+		}
+		if matched==true{
+			fmt.Println(item)
+		}
 
-}
+	}
+
+
+	}
+
+
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
+

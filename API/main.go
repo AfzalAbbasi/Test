@@ -13,6 +13,10 @@ import (
 	"github.com/jasonlvhit/gocron"
 	"github.com/labstack/gommon/log"
 	"golang.org/x/time/rate"
+<<<<<<< HEAD
+=======
+	"time"
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 )
 
 var limiter = rate.NewLimiter(2, 5)
@@ -87,9 +91,21 @@ type Device []struct {
 	DeviceType   string `json:"deviceType" bson:"deviceType"`
 }
 
+<<<<<<< HEAD
 var sql_con, err = sql.Open("mysql", "root:lmkt@ptcl@tcp(mon.epik.io:3306)/DevicesLog")
+=======
+var i, err = sql.Open("mysql", "root:lmkt@ptcl@tcp(mon.epik.io:3306)/DevicesLog")
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 
+/*func Connerction() *sql.DB {
+	db, err :=
+	if err != nil {
+		fmt.Println(err)
+	}
+	return db
+}*/
 func main() {
+<<<<<<< HEAD
 	sql_con.SetMaxOpenConns(-1)
 	http.HandleFunc("/dataupload", postdata)
 	http.HandleFunc("/getdata", getdata)
@@ -99,6 +115,14 @@ func main() {
 	}()
 	http.ListenAndServe(":8080", nil)
 
+=======
+	i.SetMaxOpenConns(-1)
+	http.HandleFunc("/dataupload", postdata)
+	http.HandleFunc("/getdata", getdata)
+	//http.ListenAndServe(":8080", nil)
+	gocron.Every(1).Minute().Do(Devices)
+	<-gocron.Start()
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 }
 func Devices() {
 	token := Session()
@@ -141,6 +165,7 @@ func Devices() {
 		var id = 0
 		data.Data.SpRegStates = b
 		j := fmt.Sprintf("%s", b)
+<<<<<<< HEAD
 		n, err := sql_con.Query("INSERT INTO DeviceInformation(device,online,firmware,spRegState,id) VALUES (?,?,?,?,?)", data.Data.Device, data.Data.Online, data.Data.Firmware, j, id)
 		 n.Close()
 		if err != nil {
@@ -179,12 +204,44 @@ func postdata(w http.ResponseWriter, req *http.Request) {
 	}
 	defer n.Close()
 
+=======
+		_, err = i.Query("INSERT INTO DeviceInformation(device,online,firmware,spRegState,id) VALUES (?,?,?,?,?)", data.Data.Device, data.Data.Online, data.Data.Firmware, j, id)
+		if err != nil {
+			log.Print(err)
+		}
+		defer i.Close()
+	}
+
+}
+func postdata(w http.ResponseWriter, req *http.Request) {
+	var data Number
+	res := req.Body
+	fmt.Println(res)
+	rep, err := ioutil.ReadAll(res)
+	if err != nil {
+		fmt.Println(err)
+	}
+	json.Unmarshal(rep, &data)
+	if err != nil {
+		fmt.Println(err)
+	}
+	var id = 0
+	_, err = i.Query("INSERT INTO UserInformation(id,serialnumber,alarmtype,createtime,Pfirstname,Plastname,Pemail,Pphone,Pmobile,Sfirstname,Slastname,Semail,Sphone,Smobile) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", id, data.SerialNumber, data.AlarmType, time.Now().UTC(), data.Primary.FirstName, data.Primary.LastName, data.Primary.Email, data.Primary.Phone, data.Primary.Mobile, data.Secondary.FirstName, data.Secondary.LastName, data.Secondary.Email, data.Secondary.Phone, data.Secondary.Mobile)
+	if err != nil {
+		BadResponse(w, "Data are Not Uploaded")
+	} else {
+		CreateSuccessResponse(w, "Data are Uploded")
+	}
+	defer i.Close()
+
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 }
 func getdata(w http.ResponseWriter, req *http.Request) {
 	queryValues := req.URL.Query()
 	id := queryValues.Get("id")
 	uptime := queryValues.Get("from")
 	totime := queryValues.Get("to")
+<<<<<<< HEAD
 	if (id=="")||(uptime=="")||(totime=="") {
 		BadResponse(w,"Enter the Correct URL")
 	}
@@ -192,14 +249,27 @@ func getdata(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		BadResponse(w, "Unable to Uplaod Data")
 		return
+=======
+
+	data, err := i.Query("select * from DeviceInformation d, UserInformation t where d.device = t.serialnumber and d.device = ? and t.createtime BETWEEN ? AND ?", id, uptime, totime)
+	if err != nil {
+		fmt.Print(err)
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 	}
 	emp := DeviceData{}
 	res := []DeviceData{}
 	for data.Next() {
+<<<<<<< HEAD
 		var idd int
 		var online bool
 		var device, firmware, createtime, serialnumber, spRegStaee, alarmtype, Pfirstname, Plastname, Pemail, Pphone, Pmobile, Sfirstname, Slastname, Semail, Sphone, Smobile string
 		err = data.Scan(&idd, &device, &online, &firmware, &spRegStaee, &idd, &serialnumber, &alarmtype, &createtime, &Pfirstname, &Plastname, &Pemail, &Pphone, &Pmobile, &Sfirstname, &Slastname, &Semail, &Sphone, &Smobile)
+=======
+		var id int
+		var online bool
+		var device, firmware, createtime, serialnumber, spRegStaee, alarmtype, Pfirstname, Plastname, Pemail, Pphone, Pmobile, Sfirstname, Slastname, Semail, Sphone, Smobile string
+		err = data.Scan(&id, &device, &online, &firmware, &spRegStaee, &id, &serialnumber, &alarmtype, &createtime, &Pfirstname, &Plastname, &Pemail, &Pphone, &Pmobile, &Sfirstname, &Slastname, &Semail, &Sphone, &Smobile)
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -222,6 +292,7 @@ func getdata(w http.ResponseWriter, req *http.Request) {
 		emp.Secondary.Mobile = Smobile
 		res = append(res, emp)
 	}
+<<<<<<< HEAD
 
 
 	if (id!=emp.Device){
@@ -252,11 +323,43 @@ func BadResponse(w http.ResponseWriter, message string) {
 	w.WriteHeader(http.StatusNotFound)
 	status := Message{message}
 	messagee, err := json.Marshal(status)
+=======
+
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Print(res)
+	messagee, err := json.Marshal(res)
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
+	if err != nil {
+		fmt.Println(err)
+	}
+	w.Write(messagee)
+<<<<<<< HEAD
+}
+=======
+
+}
+func CreateSuccessResponse(w http.ResponseWriter, message string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	status := Message{message}
+	messagee, err := json.Marshal(status)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	w.Write(messagee)
+}
+func BadResponse(w http.ResponseWriter, message string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNotFound)
+	status := Message{message}
+	messagee, err := json.Marshal(status)
 	if err != nil {
 		fmt.Println(err)
 	}
 	w.Write(messagee)
 }
+>>>>>>> ce325fd8a343c52aaca454d25d65dbbd2380ea51
 
 func Session() string {
 	person := &Person{"obiapi@epik.io", "b4ea33ea"}
